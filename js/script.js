@@ -2,7 +2,7 @@ let newList = [];
 let page = 1;
 let callAPI=async()=>{
     keyAPI = `d126d06694e64a09bafd65da66600a48`
-    let url=`http://newsapi.org/v2/everything?q="technology"&page=${page}&apiKey=${keyAPI}`;
+    let url=`https://newsapi.org/v2/everything?q="technology"&page=${page}&apiKey=${keyAPI}`;
 
     let data = await fetch(url);
     let result = await data.json();
@@ -12,45 +12,45 @@ let callAPI=async()=>{
     console.log("data",data);
     console.log("json",result);
     console.log("article list", newList);
-    searchBySource();
+    // searchBySource();
     render(newList);
 }
-let searchBySource = () => {
-    let sourceNames = newList.map((item)=> item.source.name)
-    console.log(sourceNames);
-    let sourceObject = sourceNames.reduce((total,name)=>{
-        console.log(total);
-        //check number of source, name is name of source and total is the object if name in total appear this will ++ in total, else source will be 1 
-        if(name in total){
-            total[name]++;
-        } else {
-            total[name] = 1;
-        }
-        return total;
-    },{})
+// let searchBySource = () => {
+//     let sourceNames = newList.map((item)=> item.source.name)
+//     console.log(sourceNames);
+//     let sourceObject = sourceNames.reduce((total,name)=>{
+//         console.log(total);
+//         //check number of source, name is name of source and total is the object if name in total appear this will ++ in total, else source will be 1 
+//         if(name in total){
+//             total[name]++;
+//         } else {
+//             total[name] = 1;
+//         }
+//         return total;
+//     },{})
 
-    let sourceArray = Object.keys(sourceObject);
+//     let sourceArray = Object.keys(sourceObject);
 
-    let htmlForSource =  sourceArray.map((item)=>{
-        `<input onchange="searchBySourceClick()" type="checkbox" id=${item}/>${item}(${sourceObject.item})`
-    }).join('')
-    document.getElementById("sourceArea").innerHTML = htmlForSource;
+//     let htmlForSource =  sourceArray.map((item)=>{
+//         `<input onchange="searchBySourceClick()" type="checkbox" id=${item}/>${item}(${sourceObject.item})`
+//     }).join('')
+//     document.getElementById("sourceArea").innerHTML = htmlForSource;
 
-}
+// }
 
-let searchBySourceClick = sourceArray.filter(()=>{if(document.getElementById("index").checked == true) {
-    let filterNews = newList.filter((item)=>{
+// let searchBySourceClick = sourceArray.filter(()=>{if(document.getElementById("index").checked == true) {
+//     let filterNews = newList.filter((item)=>{
         
-    })
-}else {
-    render (newList);
-}
-})
+//     })
+// }else {
+//     render (newList);
+// }
+// })
 
 let onLoadCategory = async() => {
     console.log("Hello")
     let category = document.getElementById("category").value;
-    let url = `http://newsapi.org/v2/top-headlines?&category=${category}&apiKey=${keyAPI}`;
+    let url = `https://newsapi.org/v2/top-headlines?&category=${category}&apiKey=${keyAPI}`;
 
     let data = await fetch(url);
     let result = await data.json();
@@ -59,8 +59,8 @@ let onLoadCategory = async() => {
     render(newList);
 }
 
-let render = (array) => {
-    let htmlForNews = array.map((item)=>{
+let render = (newList) => {
+    let htmlForNews = newList.map((item)=>{
         
         return `<div style="font-family: 'Asap', sans-serif;" class="d-flex p-2" id="news">
         <div class="row border-secondary">
