@@ -70,7 +70,7 @@ let render = (newList) => {
         <div class="col col-md-6 col-sm-12">
         <h2 class="font-weight-bold" id="title"> <a href="${item.url} style="cursor:pointer">${item.title}</a> </h2>
         <p> ${item.description} </p>
-        <div style="font-size:0.8rem;">${item.publishedAt}</div>
+        <div style="font-size:0.8rem;">${moment(item.publishedAt).fromNow()}</div>
         <div class="blockquote-footer">${item.source.name}</div>
         </div>
         </div>
